@@ -20,14 +20,6 @@ body {
     margin: auto;
 }
 
-/* Title */
-h2 {
-    margin-top: 3.2rem;
-    margin-bottom: 0.8rem;
-    color: var(--color-very-dark-gray);
-    font-weight: normal;
-}
-
 /* Header */
 header {
     background: #2D4A22;
@@ -38,6 +30,14 @@ header {
 #logo {
     color: #fff;
     font-weight: 100;
+}
+
+/* Title */
+h2 {
+    margin-top: 3.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-very-dark-gray);
+    font-weight: normal;
 }
 
 /* Balance */
