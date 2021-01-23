@@ -19,28 +19,39 @@
     </header>
     <main class="container">
         <section id="balance">
-            <h2>Balanço</h2>
+            <h2 class="sr-only">Balanço</h2>
             <div class="card">
-                <h3>Entradas</h3>
+                <h3>
+                    <span>Entradas</span>
+                    <img src="images/income.svg" alt="Imagem de Entrada">
+                </h3>
                 <p>R$ 5.000,00</p>
             </div>
             <div class="card">
-                <h3>Saídas</h3>
+                <h3>
+                    <span>Saídas</span>
+                    <img src="images/expense.svg" alt="Imagem de Saídas">
+                </h3>
                 <p>R$ 2.000,00</p>
             </div>
             <div class="card total">
-                <h3>Total</h3>
+                <h3>
+                    <span>Saldo</span>
+                    <img src="images/total.svg" alt="Imagem do Saldo">
+                </h3>
                 <p>R$ 3.000,00</p>
             </div>
         </section>
         <section id="transaction">
-            <h2>Transações</h2>
+            <h2 class="sr-only">Transações</h2>
+            <a href="#" class="button new" onclick="modal.open()">+ Nova Transação</a>
             <table id="data-table">
                 <thead>
                     <tr>
                         <th>Descrição</th>
                         <th>Valor</th>
                         <th>Data</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,24 +59,62 @@
                         <td class="description">Luz</td>
                         <td class="expense">- R$ 500,00</td>
                         <td class="date">23/01/2021</td>
+                        <td>
+                            <img src="images/minus.svg" alt="Remover Transação">
+                        </td>
                     </tr>
                     <tr>
                         <td class="description">Criação website</td>
                         <td class="income">R$ 5.000,00</td>
                         <td class="date">23/01/2021</td>
+                        <td>
+                            <img src="images/minus.svg" alt="Remover Transação">
+                        </td>
                     </tr>
                     <tr>
                         <td class="description">Internet</td>
                         <td class="expense">- R$ 200,00</td>
                         <td class="date">23/01/2021</td>
+                        <td>
+                            <img src="images/minus.svg" alt="Remover Transação">
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </section>
     </main>
+    <div class="modal-overlay">
+        <div class="modal">
+            <div id="form">
+                <h2>Nova Transação</h2>
+                <form action="" method="">
+                    <div class="input-group">
+                        <label class="sr-only" for="descripton">Descrição</label>
+                        <input type="text" id="descripton" name="descripton" placeholder="Descrição">
+                    </div>
+                    <div class="input-group">
+                        <label class="sr-only" for="amount">Valor</label>
+                        <input type="number" name="amount" id="amount" step="0.01" placeholder="0,00">
+                        <small class="help">
+                            Use o sinal - (negativo) para despesas e , (vírgula) para casas decimais.
+                        </small>
+                    </div>
+                    <div class="input-group">
+                        <label class="sr-only" for="date">Data</label>
+                        <input type="date" name="date" id="date">
+                    </div>
+                    <div class="input-group actions">
+                        <a href="#" class="button cancel" onclick="modal.close()">Cancelar</a>
+                        <button type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <footer>
         <p>&copy; Lucas Vinicius</p>
     </footer>
+    <script src="js/finance.js"></script>
 </body>
 
 </html>
