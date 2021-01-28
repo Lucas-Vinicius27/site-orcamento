@@ -43,13 +43,21 @@ const tbody = {
     },
     innerHTMLTBody(transaction) {
         const CSSclass = transaction.amount > 0 ? 'income' : 'expense';
+        const amount = utils.formatCurrency(transaction.amount);
         const html =`<td class="description">${transaction.description}</td>
-        <td class="${CSSclass}">${transaction.amount}</td>
+        <td class="${CSSclass}">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
             <img src="images/minus.svg" alt="Remover Transação">
         </td>`;
         return html;
+    }
+};
+
+const utils = {
+    formatCurrency(value) {
+        const signal = Number(value) < 0 ? '-' : '';
+        return value;
     }
 };
 
