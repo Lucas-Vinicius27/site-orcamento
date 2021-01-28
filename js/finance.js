@@ -34,7 +34,7 @@ const balance = {
     total() { }
 };
 
-const tbody = {
+const main = {
     transactionContainer: document.querySelector('#data-table tbody'),
     addTransaction(transaction, index) {
         const tr = document.createElement('tr');
@@ -51,16 +51,22 @@ const tbody = {
             <img src="images/minus.svg" alt="Remover Transação">
         </td>`;
         return html;
+    },
+    updateBalance() {
+        
     }
 };
 
 const utils = {
     formatCurrency(value) {
         const signal = Number(value) < 0 ? '-' : '';
-        return value;
+        value = String(value).replace(/\D/g, '');
+        value = Number(value) / 100;
+        value = value.toLocaleString("pt-br", { style: 'currency', currency: 'BRL' });
+        return signal + value;
     }
 };
 
 transaction.forEach((transaction) => {
-    tbody.addTransaction(transaction);
+    main.addTransaction(transaction);
 });
