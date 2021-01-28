@@ -33,3 +33,22 @@ const balance = {
     expenses() { },
     total() { }
 };
+
+const tbody = {
+    transactionContainer: document.querySelector('#data-table tbody'),
+    addTransaction(transaction, index) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = this.innerHTMLTBody(transaction);
+    },
+    innerHTMLTBody(transaction) {
+        const html =`<td class="description">${transaction.description}</td>
+        <td class="expense">${transaction.amount}</td>
+        <td class="date">${transaction.date}</td>
+        <td>
+            <img src="images/minus.svg" alt="Remover Transação">
+        </td>`;
+        return html;
+    }
+};
+
+tbody.addTransaction(transaction[0]);
