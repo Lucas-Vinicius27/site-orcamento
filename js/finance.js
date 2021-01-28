@@ -39,6 +39,7 @@ const tbody = {
     addTransaction(transaction, index) {
         const tr = document.createElement('tr');
         tr.innerHTML = this.innerHTMLTBody(transaction);
+        this.transactionContainer.appendChild(tr);
     },
     innerHTMLTBody(transaction) {
         const html =`<td class="description">${transaction.description}</td>
