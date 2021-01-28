@@ -53,6 +53,6 @@ const tbody = {
     }
 };
 
-for (const i in transaction) {
-    tbody.addTransaction(transaction[i]);
-}
+transaction.forEach((transaction) => {
+    tbody.addTransaction(transaction);
+});
