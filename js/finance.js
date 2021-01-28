@@ -42,8 +42,9 @@ const tbody = {
         this.transactionContainer.appendChild(tr);
     },
     innerHTMLTBody(transaction) {
+        const CSSclass = transaction.amount > 0 ? 'income' : 'expense';
         const html =`<td class="description">${transaction.description}</td>
-        <td class="expense">${transaction.amount}</td>
+        <td class="${CSSclass}">${transaction.amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
             <img src="images/minus.svg" alt="Remover Transação">
@@ -52,4 +53,6 @@ const tbody = {
     }
 };
 
-tbody.addTransaction(transaction[0]);
+for (const i in transaction) {
+    tbody.addTransaction(transaction[i]);
+}
