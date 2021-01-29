@@ -1,5 +1,5 @@
 # Site Orçamento
-Site de orçamento totalmente frond-end, desenvolvido com base na Maratona e Curso Discover da [Rocketseat](https://app.rocketseat.com.br).
+Site de orçamento totalmente frond-end, tela de orçamento mensal desenvolvido com base na Maratona e Curso Discover da [Rocketseat](https://app.rocketseat.com.br).
 
 ## Aulas da Maratona Discover
 * [Aula 01](https://www.youtube.com/watch?v=NlDr6JX3VvA)
