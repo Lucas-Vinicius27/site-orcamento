@@ -123,7 +123,6 @@ const Form = {
             requestApp.add(transaction);
             this.clearFields();
             modal.close();
-            App.reload();
         }
         catch (error) {
             alert(error.message);
