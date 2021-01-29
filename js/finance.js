@@ -7,31 +7,33 @@ const modal = {
     }
 };
 
-const transaction = [
-    {
-        id: 1,
-        description: 'Luz',
-        amount: -50000,
-        date: '23/01/2021',
-    },
-    {
-        id: 2,
-        description: 'Criação Website',
-        amount: 500000,
-        date: '23/01/2021',
-    },
-    {
-        id: 3,
-        description: 'Internet',
-        amount: -20000,
-        date: '23/01/2021',
-    },
-];
-
-const balance = {
-    all: transaction,
+const requestApp = {
+    all: [
+        {
+            id: 1,
+            description: 'Luz',
+            amount: -50000,
+            date: '23/01/2021',
+        },
+        {
+            id: 2,
+            description: 'Criação Website',
+            amount: 500000,
+            date: '23/01/2021',
+        },
+        {
+            id: 3,
+            description: 'Internet',
+            amount: -20000,
+            date: '23/01/2021',
+        },
+    ],
     add(transaction) {
         this.all.push(transaction);
+        App.reload();
+    },
+    remove(index) {
+        this.all.splice(index, 1);
         App.reload();
     },
     incomes() {
@@ -76,9 +78,9 @@ const main = {
         return html;
     },
     updateBalance() {
-        document.getElementById('incomeDisplay').innerHTML = utils.formatCurrency(balance.incomes());
-        document.getElementById('expenseDisplay').innerHTML = utils.formatCurrency(balance.expenses());
-        document.getElementById('totalDisplay').innerHTML = utils.formatCurrency(balance.total());
+        document.getElementById('incomeDisplay').innerHTML = utils.formatCurrency(requestApp.incomes());
+        document.getElementById('expenseDisplay').innerHTML = utils.formatCurrency(requestApp.expenses());
+        document.getElementById('totalDisplay').innerHTML = utils.formatCurrency(requestApp.total());
     },
     clearTransaction() {
         this.transactionContainer.innerHTML = '';
@@ -95,9 +97,12 @@ const utils = {
     }
 };
 
+const Form = {
+};
+
 const App = {
     init() {
-        balance.all.forEach((transaction) => {
+        requestApp.all.forEach((transaction) => {
             main.addTransaction(transaction);
         });
 
@@ -110,10 +115,3 @@ const App = {
 }
 
 App.init();
-
-balance.add({
-            id: 4,
-            description: 'APP',
-            amount: 200000,
-            date: '24/01/2021'
-        });
