@@ -25,13 +25,36 @@ const transaction = [
         description: 'Internet',
         amount: -20000,
         date: '23/01/2021',
-    }
+    },
 ];
 
 const balance = {
-    incomes() { },
-    expenses() { },
-    total() { }
+    all: transaction,
+    add(transaction) {
+        this.all.push(transaction);
+        App.reload();
+    },
+    incomes() {
+        let income = 0;
+        this.all.forEach((transaction) => {
+            if (transaction.amount > 0) {
+                income += transaction.amount;
+            }
+        });
+        return income;
+    },
+    expenses() {
+        let expense = 0;
+        this.all.forEach((transaction) => {
+            if (transaction.amount < 0) {
+                expense += transaction.amount;
+            }
+        });
+        return expense;
+    },
+    total() {
+        return this.incomes() + this.expenses();
+    }
 };
 
 const main = {
@@ -53,7 +76,12 @@ const main = {
         return html;
     },
     updateBalance() {
-        
+        document.getElementById('incomeDisplay').innerHTML = utils.formatCurrency(balance.incomes());
+        document.getElementById('expenseDisplay').innerHTML = utils.formatCurrency(balance.expenses());
+        document.getElementById('totalDisplay').innerHTML = utils.formatCurrency(balance.total());
+    },
+    clearTransaction() {
+        this.transactionContainer.innerHTML = '';
     }
 };
 
@@ -67,6 +95,25 @@ const utils = {
     }
 };
 
-transaction.forEach((transaction) => {
-    main.addTransaction(transaction);
-});
+const App = {
+    init() {
+        balance.all.forEach((transaction) => {
+            main.addTransaction(transaction);
+        });
+
+        main.updateBalance();
+    },
+    reload() {
+        main.clearTransaction();
+        this.init();
+    }
+}
+
+App.init();
+
+balance.add({
+            id: 4,
+            description: 'APP',
+            amount: 200000,
+            date: '24/01/2021'
+        });
