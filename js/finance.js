@@ -94,10 +94,63 @@ const utils = {
         value = Number(value) / 100;
         value = value.toLocaleString("pt-br", { style: 'currency', currency: 'BRL' });
         return signal + value;
-    }
+    },
+    formatAmount(value) {
+        return Number(value) * 100;
+    },
+    formatDate(date) {
+        const splittedDate = date.split('-');
+        return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`;
+    },
 };
 
 const Form = {
+    description: document.querySelector('input#descripton'),
+    amount: document.querySelector('input#amount'),
+    date: document.querySelector('input#date'),
+    getValues() {
+        return {
+            description: this.description.value,
+            amount: this.amount.value,
+            date: this.date.value,
+        };
+    },
+    submit(event) {
+        event.preventDefault();
+        try {
+            this.validateFields();
+            const transaction = this.formatData();
+            requestApp.add(transaction);
+            this.clearFields();
+            modal.close();
+            App.reload();
+        }
+        catch (error) {
+            alert(error.message);
+        }
+    },
+    validateFields() {
+        const { description, amount, date } = this.getValues();
+
+        if (description.trim() === '' || amount.trim() === '' || date.trim() === '') {
+            throw new Error('Por favor, preencha todos os campos!');
+        }
+    },
+    formatData() {
+        let { description, amount, date } = this.getValues();
+        amount = utils.formatCurrency();
+        date = utils.formatDate();
+        return {
+            description,
+            amount,
+            date
+        };
+    },
+    clearFields() {
+        this.description.value = '';
+        this.amount.value = '';
+        this.date.value = '';
+    },
 };
 
 const App = {
