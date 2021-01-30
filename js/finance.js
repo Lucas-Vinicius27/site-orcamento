@@ -115,7 +115,7 @@ class Finance {
     }
 
     formatAmount(value) {
-        return Number(value) * 100;
+        return Math.round(Number(value) * 100);
     }
 
     formatDate(date) {
