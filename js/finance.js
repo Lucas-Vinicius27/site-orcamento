@@ -83,7 +83,7 @@ class Finance {
     
     innerHtmlTBody(transaction, index) {
         const finance = this;
-        const cssClass = transaction.amount > '0' ? 'income' : 'expense';
+        const cssClass = transaction.amount > 0 ? 'income' : 'expense';
         const amount = finance.formatCurrency(transaction.amount);
         const html = `<td class="description">${transaction.description}</td>
         <td class="${cssClass}">${amount}</td>
