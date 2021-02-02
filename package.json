@@ -7,6 +7,7 @@
         "watch": "npm run development -- --watch",
         "watch-poll": "npm run watch -- --watch-poll",
         "prod": "npm run production",
+        "test": "jest",
         "watch-jest": "jest --watch"
     },
     "dependencies": {
@@ -17,6 +18,9 @@
         "npm": "^7.5.2"
     },
     "devDependencies": {
-        "jest": "^26.6.3"
+        "jest": "^26.6.3",
+        "eslint": "^7.17.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.22.1"
     }
 }
