@@ -176,4 +176,3 @@ class Finance {
 
 const finance = new Finance();
 finance.init();
-module.exports = Finance;
