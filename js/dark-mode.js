@@ -38,3 +38,4 @@ class DarkMode {
 
 const darkMode = new DarkMode();
 darkMode.init();
+module.exports = DarkMode;
