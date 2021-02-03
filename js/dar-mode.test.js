@@ -1,3 +1,5 @@
-const { describe } = require("yargs");
-
-describe();
+describe('Dark Mode', () => {
+    test('init', () => {
+        
+    });
+});
