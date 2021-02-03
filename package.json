@@ -3,12 +3,8 @@
     "version": "1.0.0",
     "license": "ISC",
     "scripts": {
-        "dev": "npm run development",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "prod": "npm run production",
         "test": "jest",
-        "watch-jest": "jest --watch"
+        "watch": "jest --watch"
     },
     "dependencies": {
         "bootstrap": "^4.6.0",
