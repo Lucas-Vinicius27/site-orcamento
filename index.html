@@ -11,7 +11,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap"
         rel="stylesheet">
-    <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 </head>
 
 <body>
@@ -74,10 +75,8 @@
                     </div>
                     <div class="input-group">
                         <label class="sr-only" for="amount">Valor</label>
-                        <input type="number" name="amount" id="amount" step="0.01" placeholder="0,00">
-                        <small class="help">
-                            Use o sinal - (negativo) para despesas e , (vírgula) para casas decimais.
-                        </small>
+                        <input type="text" name="amount" id="amount" step="0.01" placeholder="0,00">
+                        <small class="help">Use o sinal - (negativo) para despesas</small>
                     </div>
                     <div class="input-group">
                         <label class="sr-only" for="date">Data</label>
@@ -94,8 +93,9 @@
     <footer>
         <p>&copy; Lucas Vinicius</p>
     </footer>
-    <!-- <script src="js/finance.js"></script> -->
+    <script src="js/finance.js"></script>
     <script src="js/dark-mode.js"></script>
+    <script src="js/maskCurrency.js"></script>
     <!-- <script src="js/index-flatpickr.js"></script> -->
 </body>
 

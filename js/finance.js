@@ -115,7 +115,10 @@ class Finance {
     }
 
     formatAmount(value) {
-        return Math.round(Number(value) * 100);
+        const signal = value < '0' ? '-' : '';
+        value = String(value).replace(/\D/g, '');
+        value = Number(signal + value);
+        return Math.round(value);
     }
 
     formatDate(date) {
