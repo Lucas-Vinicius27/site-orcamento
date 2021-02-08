@@ -89,6 +89,9 @@ class Finance {
         <td class="${cssClass}">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
+            <img src="images/edit.png" alt="Editar Transação" onclick="">
+        </td>
+        <td>
             <img src="images/minus.svg" alt="Remover Transação" onclick="finance.remove(${index})">
         </td>`;
         return html;
