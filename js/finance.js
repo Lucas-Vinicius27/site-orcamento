@@ -40,6 +40,21 @@ class Finance {
         finance.reload();
     }
 
+    edit(index) {
+        const finance = this;
+        const splittedDate = finance.all[index].date.split('/');
+        // const btnCancel = document.querySelector('a.cancel');
+        // const btnSave = document.querySelector('button');
+        // btnCancel.addEventListener('click', () => {
+        //     finance.clearFields();
+        // });
+        // finance.toggleModal();
+        // finance.description.value = finance.all[index].description;
+        // finance.amount.value = finance.all[index].amount;
+        // finance.date.value = `${splittedDate[2]}-${splittedDate[1]}-${splittedDate[0]}`;
+        // finance.remove(index);
+    }
+
     remove(index) {
         const finance = this;
         finance.all.splice(index, 1);
@@ -89,7 +104,7 @@ class Finance {
         <td class="${cssClass}">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
-            <img src="images/edit.png" alt="Editar Transação" onclick="">
+            <img src="images/edit.png" alt="Editar Transação" onclick="finance.edit(${index})">
         </td>
         <td>
             <img src="images/minus.svg" alt="Remover Transação" onclick="finance.remove(${index})">
