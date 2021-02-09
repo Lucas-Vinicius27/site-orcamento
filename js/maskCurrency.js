@@ -5,11 +5,3 @@ $("#amount").maskMoney({
     decimal: ',',
     affixesStay: false
 });
-
-$("#amountEdit").maskMoney({
-    prefix: 'R$ ',
-    allowNegative: true,
-    thousands: '.',
-    decimal: ',',
-    affixesStay: false
-});
