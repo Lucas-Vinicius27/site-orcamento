@@ -1,11 +1,15 @@
 class Finance {
     constructor() {
-        this.modal = document.querySelector('.modal-overlay').classList;
+        this.modal = document.querySelector('#newTransaction').classList;
+        this.modalEdit = document.querySelector('#editTransaction').classList;
         this.all = this.getStorage();
         this.transactionContainer = document.querySelector('#data-table tbody');
         this.description = document.querySelector('input#description');
+        this.descriptionEdit = document.querySelector('input#descriptionEdit');
         this.amount = document.querySelector('input#amount');
+        this.amountEdit = document.querySelector('input#amountEdit');
         this.date = document.querySelector('input#date');
+        this.dateEdit = document.querySelector('input#dateEdit');
     }
 
     init() {
@@ -26,6 +30,11 @@ class Finance {
         finance.modal.toggle('active');
     }
 
+    toggleModalEdit() {
+        const finance = this;
+        finance.modalEdit.toggle('active');
+    }
+
     getStorage() {
         return JSON.parse(localStorage.getItem('transaction')) || [];
     }
@@ -43,16 +52,13 @@ class Finance {
     edit(index) {
         const finance = this;
         const splittedDate = finance.all[index].date.split('/');
-        // const btnCancel = document.querySelector('a.cancel');
-        // const btnSave = document.querySelector('button');
-        // btnCancel.addEventListener('click', () => {
-        //     finance.clearFields();
-        // });
-        // finance.toggleModal();
-        // finance.description.value = finance.all[index].description;
-        // finance.amount.value = finance.all[index].amount;
-        // finance.date.value = `${splittedDate[2]}-${splittedDate[1]}-${splittedDate[0]}`;
-        // finance.remove(index);
+        const btnSave = document.querySelector('#btnSaveEdit');
+        let id = index;
+        btnSave.addEventListener('click', () => finance.remove(id));
+        finance.descriptionEdit.value = finance.all[index].description;
+        finance.amountEdit.value = finance.all[index].amount;
+        finance.dateEdit.value = `${splittedDate[2]}-${splittedDate[1]}-${splittedDate[0]}`;
+        finance.toggleModalEdit();
     }
 
     remove(index) {
@@ -153,6 +159,15 @@ class Finance {
         };
     }
 
+    getValuesEdit() {
+        const finance = this;
+        return {
+            description: finance.descriptionEdit.value,
+            amount: finance.amountEdit.value,
+            date: finance.dateEdit.value
+        };
+    }
+
     submit(event) {
         const finance = this;
         event.preventDefault();
@@ -167,6 +182,19 @@ class Finance {
         }
     }
 
+    submitEdit(event) {
+        const finance = this;
+        event.preventDefault();
+        try {
+            finance.validateFieldsEdit();
+            const transaction = finance.formatDataEdit();
+            finance.add(transaction);
+            finance.toggleModalEdit();
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+
     validateFields() {
         const finance = this;
         const { description, amount, date } = finance.getValues();
@@ -175,9 +203,29 @@ class Finance {
         }
     }
 
+    validateFieldsEdit() {
+        const finance = this;
+        const { description, amount, date } = finance.getValuesEdit();
+        if (description.trim() === '' || amount.trim() === '' || date.trim() === '') {
+            throw new Error('Por favor, preencha todos os campos!');
+        }
+    }
+
     formatData() {
         const finance = this;
         let { description, amount, date } = finance.getValues();
+        amount = finance.formatAmount(amount);
+        date = finance.formatDate(date);
+        return {
+            description,
+            amount,
+            date
+        };
+    }
+
+    formatDataEdit() {
+        const finance = this;
+        let { description, amount, date } = finance.getValuesEdit();
         amount = finance.formatAmount(amount);
         date = finance.formatDate(date);
         return {

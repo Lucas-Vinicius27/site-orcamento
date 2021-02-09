@@ -13,7 +13,6 @@
         rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> -->
 </head>
 
 <body>
@@ -66,7 +65,7 @@
             </table>
         </section>
     </main>
-    <div class="modal-overlay">
+    <div id="newTransaction" class="modal-overlay">
         <div class="modal">
             <div id="form">
                 <h2>Nova Transação</h2>
@@ -92,14 +91,38 @@
             </div>
         </div>
     </div>
+    <div id="editTransaction" class="modal-overlay">
+        <div class="modal">
+            <div id="form">
+                <h2>Editar Transação</h2>
+                <form action="" method="GET" onsubmit="finance.submitEdit(event)">
+                    <div class="input-group">
+                        <label class="sr-only" for="description">Descrição</label>
+                        <input type="text" id="descriptionEdit" name="descriptionEdit" placeholder="Descrição">
+                    </div>
+                    <div class="input-group">
+                        <label class="sr-only" for="amount">Valor</label>
+                        <input type="text" name="amountEdit" id="amountEdit" step="0.01" placeholder="0,00">
+                        <small class="help">Use o sinal - (negativo) para despesas.</small>
+                    </div>
+                    <div class="input-group">
+                        <label class="sr-only" for="date">Data</label>
+                        <input type="date" name="dateEdit" id="dateEdit">
+                    </div>
+                    <div class="input-group actions">
+                        <a href="#" class="button cancel" onclick="finance.toggleModalEdit()">Cancelar</a>
+                        <button id="btnSaveEdit" type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <footer>
         <p>&copy; Lucas Vinicius</p>
     </footer>
     <script src="js/finance.js"></script>
     <script src="js/dark-mode.js"></script>
     <script src="js/maskCurrency.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
-    <!-- <script src="js/flatpickrDate.js"></script> -->
 </body>
 
 </html>
