@@ -186,7 +186,6 @@ class Finance {
         const finance = this;
         event.preventDefault();
         try {
-            finance.validateFieldsEdit();
             const transaction = finance.formatDataEdit();
             finance.add(transaction);
             finance.toggleModalEdit();
@@ -198,14 +197,6 @@ class Finance {
     validateFields() {
         const finance = this;
         const { description, amount, date } = finance.getValues();
-        if (description.trim() === '' || amount.trim() === '' || date.trim() === '') {
-            throw new Error('Por favor, preencha todos os campos!');
-        }
-    }
-
-    validateFieldsEdit() {
-        const finance = this;
-        const { description, amount, date } = finance.getValuesEdit();
         if (description.trim() === '' || amount.trim() === '' || date.trim() === '') {
             throw new Error('Por favor, preencha todos os campos!');
         }
