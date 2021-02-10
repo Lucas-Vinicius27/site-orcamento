@@ -272,15 +272,15 @@ td.expense {
 }
 
 /* Form */
-#form {
+.form {
     max-width: 500px;
 }
 
-#form h2 {
+.form h2 {
     margin-top: 0;
 }
 
-#form form input {
+.form form input {
     border: none;
     border-radius: 0.2rem;
     padding: 0.8rem;
