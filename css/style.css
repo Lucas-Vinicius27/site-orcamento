@@ -160,6 +160,10 @@ button:hover {
     opacity: 1;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 /* Cards */
 .card {
     background: var(--background-card-table);

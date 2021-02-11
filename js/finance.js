@@ -124,10 +124,10 @@ class Finance {
         <td class="${cssClass}">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
-            <img src="images/edit.png" alt="Editar Transação" onclick="finance.edit(${index})">
+            <img class="pointer" src="images/edit.png" alt="Editar Transação" onclick="finance.edit(${index})">
         </td>
         <td>
-            <img src="images/minus.svg" alt="Remover Transação" onclick="finance.remove(${index})">
+            <img class="pointer" src="images/minus.svg" alt="Remover Transação" onclick="finance.remove(${index})">
         </td>`;
         return html;
     }
