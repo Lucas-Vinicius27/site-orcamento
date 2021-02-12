@@ -1,11 +1,16 @@
 class Finance {
     constructor() {
         this.modal = document.querySelector('.modal-overlay').classList;
+        this.modalEdit = document.querySelector('#modalEdit').classList;
+        this.indexArray = 0;
         this.all = this.getStorage();
         this.transactionContainer = document.querySelector('#data-table tbody');
         this.description = document.querySelector('input#description');
+        this.descriptionEdit = document.querySelector('input#descriptionEdit');
         this.amount = document.querySelector('input#amount');
+        this.amountEdit = document.querySelector('input#amountEdit');
         this.date = document.querySelector('input#date');
+        this.dateEdit = document.querySelector('input#dateEdit');
     }
 
     init() {
@@ -26,6 +31,11 @@ class Finance {
         finance.modal.toggle('active');
     }
 
+    toggleModalEdit() {
+        const finance = this;
+        finance.modalEdit.toggle('active');
+    }
+
     getStorage() {
         return JSON.parse(localStorage.getItem('transaction')) || [];
     }
@@ -38,6 +48,31 @@ class Finance {
         const finance = this;
         finance.all.push(transaction);
         finance.reload();
+    }
+
+    addEdit(transaction) {
+        const finance = this;
+        const editTransaction = transaction;
+        const novoAll = finance.all.map((transaction, indice) => {
+            if (finance.indexArray === indice) {
+                transaction.description = editTransaction.description;
+                transaction.amount = editTransaction.amount;
+                transaction.date = editTransaction.date;
+            }
+            return transaction;
+        });
+        finance.all = novoAll;
+        finance.reload();
+    }
+
+    edit(index) {
+        const finance = this;
+        const splittedDate = finance.all[index].date.split('/');
+        finance.indexArray = index;
+        finance.toggleModalEdit();
+        finance.descriptionEdit.value = finance.all[index].description;
+        finance.amountEdit.value = finance.all[index].amount;
+        finance.dateEdit.value = `${splittedDate[2]}-${splittedDate[1]}-${splittedDate[0]}`;
     }
 
     remove(index) {
@@ -89,7 +124,10 @@ class Finance {
         <td class="${cssClass}">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
-            <img src="images/minus.svg" alt="Remover Transação" onclick="finance.remove(${index})">
+            <img class="pointer" src="images/edit.png" alt="Editar Transação" onclick="finance.edit(${index})">
+        </td>
+        <td>
+            <img class="pointer" src="images/minus.svg" alt="Remover Transação" onclick="finance.remove(${index})">
         </td>`;
         return html;
     }
@@ -115,7 +153,10 @@ class Finance {
     }
 
     formatAmount(value) {
-        return Math.round(Number(value) * 100);
+        const signal = value < '0' ? '-' : '';
+        value = String(value).replace(/\D/g, '');
+        value = Number(signal + value);
+        return Math.round(value);
     }
 
     formatDate(date) {
@@ -129,6 +170,15 @@ class Finance {
             description: finance.description.value,
             amount: finance.amount.value,
             date: finance.date.value
+        };
+    }
+
+    getValuesEdit() {
+        const finance = this;
+        return {
+            description: finance.descriptionEdit.value,
+            amount: finance.amountEdit.value,
+            date: finance.dateEdit.value,
         };
     }
 
@@ -146,6 +196,14 @@ class Finance {
         }
     }
 
+    submitEdit(event) {
+        const finance = this;
+        event.preventDefault();
+        const transaction = finance.formatDataEdit();
+        finance.addEdit(transaction);
+        finance.toggleModalEdit();
+    }
+
     validateFields() {
         const finance = this;
         const { description, amount, date } = finance.getValues();
@@ -157,6 +215,18 @@ class Finance {
     formatData() {
         const finance = this;
         let { description, amount, date } = finance.getValues();
+        amount = finance.formatAmount(amount);
+        date = finance.formatDate(date);
+        return {
+            description,
+            amount,
+            date
+        };
+    }
+
+    formatDataEdit() {
+        const finance = this;
+        let { description, amount, date } = finance.getValuesEdit();
         amount = finance.formatAmount(amount);
         date = finance.formatDate(date);
         return {
