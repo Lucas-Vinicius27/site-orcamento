@@ -185,6 +185,7 @@ class Finance {
     submit(event) {
         const finance = this;
         event.preventDefault();
+
         try {
             finance.validateFields();
             const transaction = finance.formatData();
@@ -199,14 +200,28 @@ class Finance {
     submitEdit(event) {
         const finance = this;
         event.preventDefault();
-        const transaction = finance.formatDataEdit();
-        finance.addEdit(transaction);
-        finance.toggleModalEdit();
+
+        try {
+            finance.validateFieldsEdit();
+            const transaction = finance.formatDataEdit();
+            finance.addEdit(transaction);
+            finance.toggleModalEdit();
+        } catch (error) {
+            alert(error.message);
+        }
     }
 
     validateFields() {
         const finance = this;
         const { description, amount, date } = finance.getValues();
+        if (description.trim() === '' || amount.trim() === '' || date.trim() === '') {
+            throw new Error('Por favor, preencha todos os campos!');
+        }
+    }
+
+    validateFieldsEdit() {
+        const finance = this;
+        const { description, amount, date } = finance.getValuesEdit();
         if (description.trim() === '' || amount.trim() === '' || date.trim() === '') {
             throw new Error('Por favor, preencha todos os campos!');
         }
